@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: d11d79c10ebed456f98b7b73e595b90a
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - Player: {fileID: 5336697494692247240, guid: 2fe31d61a352e4d11bd541d7cd3d31ec,
+      type: 3}
+  - mainCamera: {fileID: 3540831686064208992, guid: 19f9d3eff5ad94da896db85e698053ab,
+      type: 3}
+  - target: {fileID: 4656364028166154605, guid: becc6f3895ddd495c9ceadd747df5948,
+      type: 3}
+  - token: {fileID: 2634138629111138545, guid: 9de4906d6f96b4741b6ea6e989b89c92, type: 3}
+  - Fire1: {fileID: 2100000, guid: 0a61e80dec4a0481abfcbc9da4b6e869, type: 2}
+  - Fire2: {fileID: 2100000, guid: ef8f9db4ddf444c1fb5e416fdcda667c, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
