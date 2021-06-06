@@ -14,7 +14,6 @@ public class PlayerScript : MonoBehaviour
     private Vector3 currentPosition = Vector3.zero;
     public int turn =2;
     public GameObject target;
-    public GameObject spreadFire;
     bool turnkeeper1 = true;
     bool turnkeeper2 = true;
     public int goal = 0;
@@ -28,11 +27,6 @@ public class PlayerScript : MonoBehaviour
     int posiz3;
     int posix4;
     int posiz4;
-    //テスト部分
-    int a;
-    int b;
-    int c;
-    int d;
     public GameObject token;
     int Fire;
     public Material Fire1;
@@ -113,11 +107,6 @@ public class PlayerScript : MonoBehaviour
         {
             posix = Random.Range(-6, 3);
             posiz = Random.Range(-5, 1);
-            //テスト部分
-            a = posix + 1;
-            b = posiz + 1;
-            c = posix - 1;
-            d = posiz - 1;
             transform.position = new Vector3(posix, 0.75f, posiz);
             //原点が(-6,-5)なので、場所と行列を合わせる
             int posixs = posix　+ 6;
@@ -216,10 +205,7 @@ public class PlayerScript : MonoBehaviour
                 Instantiate(token,new Vector3(posix, 0.75f, posiz), Quaternion.identity);
                 Fire++;
                 //テスト部分
-                Instantiate(spreadFire, new Vector3(a, 0.75f, posiz), Quaternion.identity);
-                Instantiate(spreadFire, new Vector3(posix, 0.75f, b), Quaternion.identity);
-                Instantiate(spreadFire, new Vector3(c, 0.75f, posiz), Quaternion.identity);
-                Instantiate(spreadFire, new Vector3(posix, 0.75f, d), Quaternion.identity);
+                Vector3 tokenPosition = token.transform.position;
             }
             if (Firecount3 >= 4)
             {
@@ -227,12 +213,11 @@ public class PlayerScript : MonoBehaviour
                 Fire++;
             }
 
-            if (Fire >= 4) 
+            if (Fire >= 4)
             {
                 Debug.Log("GameOver");
                 gameText.text = "GameOver";
             }
-
             turn = 2;
 
         }
