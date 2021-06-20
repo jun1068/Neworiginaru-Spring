@@ -150,6 +150,8 @@ public class PlayerScript : MonoBehaviour
             //Debug.Log(posixs +","+posizs +"のfirecountは"+number[posixs, posizs]);
             if (Firecount == 1)
             {
+                Instantiate(target, transform.position, transform.rotation);
+                transform.position = new Vector3(Random.Range(-6, 3), 0.75f, Random.Range(1, 7));
                 target.GetComponent<Renderer>().material = Fire1;
             }
             else if (Firecount == 2)
@@ -160,10 +162,6 @@ public class PlayerScript : MonoBehaviour
             {
                 target.GetComponent<Renderer>().material = Fire3;
             }
-            //火を生成
-            Instantiate(target, transform.position, transform.rotation);
-            transform.position = new Vector3(Random.Range(-6, 3), 0.75f, Random.Range(1, 7));
-
         }
 
         if (createCount >= 2 && createCount <= 3)
@@ -179,6 +177,8 @@ public class PlayerScript : MonoBehaviour
             anotherScript.NewNumber(posixs3, posizs3, Firecount3);
             if (Firecount3 == 1)
             {
+                Instantiate(target, transform.position, transform.rotation);
+                transform.position = new Vector3(Random.Range(-6, 3), 0.75f, Random.Range(1, 7));
                 target.GetComponent<Renderer>().material = Fire1;
             }
             else if (Firecount3 == 2)
@@ -189,9 +189,6 @@ public class PlayerScript : MonoBehaviour
             {
                 target.GetComponent<Renderer>().material = Fire3;
             }
-
-            Instantiate(target, transform.position, transform.rotation);
-            transform.position = new Vector3(Random.Range(-6, 3), 0.75f, Random.Range(1, 7));
         }
     }
 }
