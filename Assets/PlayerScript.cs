@@ -27,18 +27,25 @@ public class PlayerScript : MonoBehaviour
     public Material Fire1;
     public Material Fire2;
     public Material Fire3;
+    public Material Fire10;//試験用
     public int Firecount;
-    public int Firecount2;
+    public int spreadFireCount;
     public int Firecount3;
-    public int Firecount4;
     int posixs = 0;
     int posizs = 0;
     int posixs3 = 0;
     int posizs3 = 0;
     int createCount = 0;
+    int tokenPositionX;
+    int tokenPositionZ;
+    private Vector3 firePosition;
+    int researchX = 0;
+    int researchZ = 0;
 
     public GameObject anotherObject;
     private FireCountManager anotherScript;
+
+    public int FireCount0 { get; private set; }
 
     // Start is called before the first frame update
     void Start()
@@ -99,6 +106,7 @@ public class PlayerScript : MonoBehaviour
         //Fireの発生条件
         if (turn == 0)
         {
+            createCount = 0;
             for (int i = 0; i < 4; i++)
             {
                 FireCreate();
@@ -109,12 +117,18 @@ public class PlayerScript : MonoBehaviour
             {
                 Instantiate(token, new Vector3(posix, 0.75f, posiz), Quaternion.identity);
                 Fire++;
-
+                //今後の行列で使うためにpositionにそれぞれ計算を加える
+                tokenPositionX = posix + 6;
+                tokenPositionZ = posiz + 5;
+                SpreadFire();
             }
             if (Firecount3 >= 4)
             {
                 Instantiate(token, new Vector3(posix3, 0.75f, posiz3), Quaternion.identity);
                 Fire++;
+                tokenPositionX = posix3 + 6;
+                tokenPositionZ = posiz3 + 5;
+                SpreadFire();
             }
             if (Fire >= 4)
             {
@@ -122,7 +136,6 @@ public class PlayerScript : MonoBehaviour
                 gameText.text = "GameOver";
             }
 
-            createCount = 0;
             turn = 2;
         }
 
@@ -191,4 +204,48 @@ public class PlayerScript : MonoBehaviour
             }
         }
     }
+
+    void SpreadFire()
+    {
+        //全部の行列について揃っているのかを調べる
+        for (researchX = 0; researchX < 9; researchX++)
+        {
+            for (researchZ = 0; researchZ < 12; researchZ++)
+            {
+                //8方向1マス以内である時
+                if (researchX - tokenPositionX <= 1 && researchX - tokenPositionX >= -1 && researchZ - tokenPositionZ <= 1 && researchZ - tokenPositionZ >= -1)
+                {
+                    //同じマスの時は処理を除外
+                    if (researchX - tokenPositionX != 0 || researchZ - tokenPositionZ != 0)
+                    {
+                        spreadFireCount = number[researchX, researchZ];
+                        spreadFireCount++;
+                        anotherScript.NewNumber(researchX, researchZ, spreadFireCount);
+                        //行列の位置からtransformの位置に戻す
+                        firePosition = new Vector3(researchX - 6, 0.75f, researchZ - 5);
+                        newFire();//作成時とは別にFirecountの処理を実行
+                    }
+
+                }
+            }
+        }
+    }
+
+    void newFire()
+    {
+        if (spreadFireCount == 1)
+        {
+            Instantiate(target, firePosition, transform.rotation);
+            target.GetComponent<Renderer>().material = Fire10;
+        }
+        else if (spreadFireCount == 2)
+        {
+            target.GetComponent<Renderer>().material = Fire10;
+        }
+        else if (spreadFireCount == 3)
+        {
+            target.GetComponent<Renderer>().material = Fire10;
+        }
+    }
+
 }
