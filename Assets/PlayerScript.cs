@@ -27,7 +27,7 @@ public class PlayerScript : MonoBehaviour
     public Material Fire1;
     public Material Fire2;
     public Material Fire3;
-    public Material Fire10;//試験用
+    //public Material Fire10;//試験用
     public int Firecount;
     public int spreadFireCount;
     public int Firecount3;
@@ -106,13 +106,24 @@ public class PlayerScript : MonoBehaviour
         //Fireの発生条件
         if (turn == 0)
         {
-            createCount = 0;
-            for (int i = 0; i < 4; i++)
+            if (Fire <= 2)
             {
-                FireCreate();
-                createCount++;
+                createCount = 0;
+                for (int i = 0; i < 4; i++)
+                {
+                    FireCreate();
+                    createCount++;
+                }
             }
-
+            else if (Fire >= 3)
+            {
+                createCount = 0;
+                for (int i = 0; i < 6; i++)
+                {
+                    FireCreate();
+                    createCount++;
+                }
+            }
             if (Firecount >= 4)
             {
                 Instantiate(token, new Vector3(posix, 0.75f, posiz), Quaternion.identity);
@@ -130,6 +141,7 @@ public class PlayerScript : MonoBehaviour
                 tokenPositionZ = posiz3 + 5;
                 SpreadFire();
             }
+            
             if (Fire >= 4)
             {
                 Debug.Log("GameOver");
@@ -236,15 +248,15 @@ public class PlayerScript : MonoBehaviour
         if (spreadFireCount == 1)
         {
             Instantiate(target, firePosition, transform.rotation);
-            target.GetComponent<Renderer>().material = Fire10;
+            target.GetComponent<Renderer>().material = Fire1;
         }
         else if (spreadFireCount == 2)
         {
-            target.GetComponent<Renderer>().material = Fire10;
+            target.GetComponent<Renderer>().material = Fire2;
         }
         else if (spreadFireCount == 3)
         {
-            target.GetComponent<Renderer>().material = Fire10;
+            target.GetComponent<Renderer>().material = Fire3;
         }
     }
 
