@@ -18,10 +18,17 @@ public class PlayerScript : MonoBehaviour
     public int goal = 0;
     bool goalkeeper = true;
     public int[,] number = new int[9, 12];
+    public int[,] number2 = new int[9, 12];
     int posix;
     int posiz;
     int posix3;
     int posiz3;
+    //
+    int posix2;
+    int posiz2;
+    int posix4;
+    int posiz4;
+    //
     public GameObject token;
     int Fire;
     public Material Fire1;
@@ -31,10 +38,18 @@ public class PlayerScript : MonoBehaviour
     public int Firecount;
     public int spreadFireCount;
     public int Firecount3;
+    public int Firecount2;
+    public int Firecount4;
     int posixs = 0;
     int posizs = 0;
     int posixs3 = 0;
     int posizs3 = 0;
+    //
+    int posixs2 = 0;
+    int posizs2 = 0;
+    int posixs4 = 0;
+    int posizs4 = 0;
+    //
     int createCount = 0;
     int tokenPositionX;
     int tokenPositionZ;
@@ -70,7 +85,7 @@ public class PlayerScript : MonoBehaviour
                 Vector3 pos = hit_info.transform.position;
                 var mousePosition = new Vector3(pos.x, 0.8f, pos.z);
 
-                if ((Player.transform.position.x - mousePosition.x) * (Player.transform.position.x - mousePosition.x) + (Player.transform.position.z - mousePosition.z) * (Player.transform.position.z - mousePosition.z) <= 1)
+                if ((Player.transform.position.x - mousePosition.x) * (Player.transform.position.x - mousePosition.x) + (Player.transform.position.z - mousePosition.z) * (Player.transform.position.z - mousePosition.z) <=1)
                 {
                     currentPosition = mainCamera.ScreenToWorldPoint(mousePosition);
                     Player.transform.position = mousePosition;
@@ -82,7 +97,7 @@ public class PlayerScript : MonoBehaviour
                         turnkeeper1 = false;
                     }
                 }
-                if (Player.transform.position.z == 6)
+                if (Player.transform.position.z == 20)
                 {
                     //一度のみ処理を実行
                     if (goalkeeper)
@@ -109,7 +124,7 @@ public class PlayerScript : MonoBehaviour
             if (Fire <= 2)
             {
                 createCount = 0;
-                for (int i = 0; i < 4; i++)
+                for (int i = 0; i < 8; i++)
                 {
                     FireCreate();
                     createCount++;
@@ -141,7 +156,23 @@ public class PlayerScript : MonoBehaviour
                 tokenPositionZ = posiz3 + 5;
                 SpreadFire();
             }
-            
+            if (Firecount2 >= 4)
+            {
+                Instantiate(token, new Vector3(posix2, 0.75f, posiz2), Quaternion.identity);
+                Fire++;
+                tokenPositionX = posix2 + 6;
+                tokenPositionZ = posiz2 - 9;
+                SpreadFire();
+            }
+            if (Firecount4 >= 4)
+            {
+                Instantiate(token, new Vector3(posix4, 0.75f, posiz4), Quaternion.identity);
+                Fire++;
+                tokenPositionX = posix4 + 6;
+                tokenPositionZ = posiz4 - 9;
+                SpreadFire();
+            }
+
             if (Fire >= 4)
             {
                 Debug.Log("GameOver");
@@ -213,6 +244,56 @@ public class PlayerScript : MonoBehaviour
             else if (Firecount3 == 3)
             {
                 target.GetComponent<Renderer>().material = Fire3;
+            }
+        if (createCount >=4 && createCount <= 5)
+            {
+                posix2 = Random.Range(-6, 3);
+                posiz2 = Random.Range(9, 15);
+                transform.position = new Vector3(posix2, 0.75f, posiz2);
+                posixs2 = posix2 + 6;
+                posizs2 = posiz2 - 9;
+                Firecount2 = number2[posixs2, posizs2];
+                Firecount2++;
+                anotherScript.NewNumber(posixs2, posizs2, Firecount2);
+                if (Firecount2 == 1)
+                {
+                    Instantiate(target, transform.position, transform.rotation);
+                    transform.position = new Vector3(Random.Range(-6, 3), 0.75f, Random.Range(9, 15));
+                    target.GetComponent<Renderer>().material = Fire1;
+                }
+                else if (Firecount2 == 2)
+                {
+                    target.GetComponent<Renderer>().material = Fire2;
+                }
+                else if (Firecount2 == 3)
+                {
+                    target.GetComponent<Renderer>().material = Fire3;
+                }
+            }
+            if (createCount >= 6 && createCount <= 7)
+            {
+                posix4 = Random.Range(-6, 3);
+                posiz4 = Random.Range(15, 21);
+                transform.position = new Vector3(posix4, 0.75f, posiz4);
+                posixs4 = posix4 + 6;
+                posizs4 = posiz4 - 9;
+                Firecount4 = number2[posixs4, posizs4];
+                Firecount4++;
+                anotherScript.NewNumber(posixs4, posizs4, Firecount4);
+                if (Firecount4 == 1)
+                {
+                    Instantiate(target, transform.position, transform.rotation);
+                    transform.position = new Vector3(Random.Range(-6, 3), 0.75f, Random.Range(15, 21));
+                    target.GetComponent<Renderer>().material = Fire1;
+                }
+                else if (Firecount4 == 2)
+                {
+                    target.GetComponent<Renderer>().material = Fire2;
+                }
+                else if (Firecount4 == 3)
+                {
+                    target.GetComponent<Renderer>().material = Fire3;
+                }
             }
         }
     }
