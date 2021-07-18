@@ -254,7 +254,7 @@ public class PlayerScript : MonoBehaviour
                 posizs2 = posiz2 - 9;
                 Firecount2 = number2[posixs2, posizs2];
                 Firecount2++;
-                anotherScript.NewNumber(posixs2, posizs2, Firecount2);
+                anotherScript.NewNumber2(posixs2, posizs2, Firecount2);
                 if (Firecount2 == 1)
                 {
                     Instantiate(target, transform.position, transform.rotation);
@@ -279,7 +279,7 @@ public class PlayerScript : MonoBehaviour
                 posizs4 = posiz4 - 9;
                 Firecount4 = number2[posixs4, posizs4];
                 Firecount4++;
-                anotherScript.NewNumber(posixs4, posizs4, Firecount4);
+                anotherScript.NewNumber2(posixs4, posizs4, Firecount4);
                 if (Firecount4 == 1)
                 {
                     Instantiate(target, transform.position, transform.rotation);
