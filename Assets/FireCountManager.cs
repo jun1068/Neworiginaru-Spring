@@ -5,7 +5,7 @@ using UnityEngine;
 public class FireCountManager : MonoBehaviour
 {
     public int[,] number = new int[9, 12];
-    public int[,] number2 = new int [9,12];
+    //public int[,] number2 = new int [9,12];
 
     public GameObject anotherObject;
     private PlayerScript anotherScript;
@@ -29,11 +29,11 @@ public class FireCountManager : MonoBehaviour
         anotherScript.number = number;
         
     }
-    public void NewNumber2(int x, int y, int z)
-    {
+    //public void NewNumber2(int x2, int y2, int z2)
+    //{
 
-        number2[x, y] = z;
-        anotherScript.number2 = number2;
+        //number2[x2, y2] = z2;
+        //anotherScript.number2 = number2;
 
-    }
+    //}
 }

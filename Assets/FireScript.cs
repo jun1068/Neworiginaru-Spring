@@ -32,13 +32,13 @@ public class FireScript : MonoBehaviour
             int posixs = posix + 6;
             int posizs = posiz + 5;
 
-            int posix2 = (int)this.transform.position.x;
-            int posiz2 = (int)this.transform.position.y;
-            int posixs2 = posix2 + 6;
-            int posizs2 = posiz2 - 9;
+            //int posix2 = (int)this.transform.position.x;
+            //int posiz2 = (int)this.transform.position.y;
+            //int posixs2 = posix2 + 6;
+            //int posizs2 = posiz2 - 9;
 
             anotherScript.NewNumber(posixs, posizs,0);
-            anotherScript.NewNumber2(posixs2, posizs2, 0);
+            //anotherScript.NewNumber2(posixs2, posizs2, 0);
 
 
             Destroy(this.gameObject);
