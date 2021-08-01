@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour
 {
-    public Text gameText;
-    public Text goaltext;
     public GameObject Player;
     public Camera mainCamera;
     private Vector3 currentPosition = Vector3.zero;
@@ -67,8 +66,6 @@ public class PlayerScript : MonoBehaviour
     {
         mainCamera = Camera.main;
         anotherScript = anotherObject.GetComponent<FireCountManager>();
-        goaltext.text = "";
-        gameText.text = "";
     }
 
     // Update is called once per frame
@@ -97,7 +94,7 @@ public class PlayerScript : MonoBehaviour
                         turnkeeper1 = false;
                     }
                 }
-                if (Player.transform.position.z == 20)
+                if (Player.transform.position.z == 6)
                 {
                     //一度のみ処理を実行
                     if (goalkeeper)
@@ -111,7 +108,7 @@ public class PlayerScript : MonoBehaviour
                 {
                     if (Player.transform.position.z == -5)
                     {
-                        goaltext.text = "GOAL";
+                        SceneManager.LoadScene("goal");
                     }
                 }
             }
@@ -176,7 +173,7 @@ public class PlayerScript : MonoBehaviour
             if (Fire >= 4)
             {
                 Debug.Log("GameOver");
-                gameText.text = "GameOver";
+                SceneManager.LoadScene("gameover"); 
             }
 
             turn = 2;
